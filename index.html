@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>미세먼지 자가 진단</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet"/>
+<style>
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      padding: 30px 20px;
+      max-width: 640px;
+      margin: 0 auto;
+      text-align: left;
+    }
+    h2, p, label, button {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+    h2 {
+      font-size: 24px;
+      margin-bottom: 10px;
+      animation-delay: 0.2s;
+    }
+    p {
+      margin-bottom: 20px;
+      font-size: 16px;
+      animation-delay: 0.4s;
+    }
+    label {
+      display: block;
+      margin-bottom: 12px;
+      font-size: 16px;
+    }
+    input[type="checkbox"] {
+      margin-right: 8px;
+    }
+    button {
+      margin-top: 20px;
+      padding: 14px 28px;
+      font-size: 16px;
+      font-weight: bold;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      transition: all 0.2s ease;
+      animation-delay: 1.4s;
+    }
+    button:hover {
+      background-color: #388e3c;
+    }
+    button:active {
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+    }
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    label:nth-of-type(1) { animation-delay: 0.6s; }
+    label:nth-of-type(2) { animation-delay: 0.7s; }
+    label:nth-of-type(3) { animation-delay: 0.8s; }
+    label:nth-of-type(4) { animation-delay: 0.9s; }
+    label:nth-of-type(5) { animation-delay: 1.0s; }
+    label:nth-of-type(6) { animation-delay: 1.1s; }
+    label:nth-of-type(7) { animation-delay: 1.2s; }
+    label:nth-of-type(8) { animation-delay: 1.3s; }
+    label:nth-of-type(9) { animation-delay: 1.4s; }
+    label:nth-of-type(10) { animation-delay: 1.5s; }
+</style>
+</head>
+<body>
+<h2>🔍 자가 진단 체크리스트</h2>
+<p>아래 항목 중 해당되는 것이 몇 개인가요?</p>
+<form id="testForm">
+<label><input type="checkbox" name="q1"/> 최근 공기가 탁한 날 외출 후 눈이 가렵거나 충혈됨</label>
+<label><input type="checkbox" name="q2"/> 미세먼지 심한 날에는 숨 쉬기 불편함</label>
+<label><input type="checkbox" name="q3"/> 기관지염이나 천식 등 호흡기 질환을 앓은 경험이 있음</label>
+<label><input type="checkbox" name="q4"/> 목이 자주 따갑고 건조함</label>
+<label><input type="checkbox" name="q5"/> 이유 없이 피로감이 느껴짐</label>
+<label><input type="checkbox" name="q6"/> 외출 후 코막힘, 재채기가 반복됨</label>
+<label><input type="checkbox" name="q7"/> 마스크를 착용해도 목이 칼칼함</label>
+<label><input type="checkbox" name="q8"/> 피부 트러블이나 가려움이 늘어남</label>
+<label><input type="checkbox" name="q9"/> 미세먼지 농도를 자주 확인하게 됨</label>
+<label><input type="checkbox" name="q10"/> 공기청정기를 24시간 돌림</label>
+<p>체크한 개수에 따라 건강 위험 단계를 확인할 수 있어요.</p>
+<button type="button" onclick="checkResult()">결과 확인하기</button>
+</form>
+<script>
+  function checkResult() {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    let count = 0;
+    checkboxes.forEach(box => {
+      if (box.checked) count++;
+    });
+    let nextPage = "";
+    if (count <= 2) {
+      nextPage = "result-low.html";
+    } else if (count <= 5) {
+      nextPage = "result-mid.html";
+    } else if (count <= 7) {
+      nextPage = "result-high.html";
+    } else {
+      nextPage = "result-veryhigh.html";
+    }
+    window.location.href = nextPage;
+  }
+</script>
+</body>
+</html>
